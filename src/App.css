@@ -1,0 +1,36 @@
+form {
+    width: 40%;
+    margin: 5rem auto;
+    /* animation: App-logo-spin 5s infinite linear; */
+    box-shadow: 3px 2px 3px 2px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+}
+
+label,
+div {
+    margin: 1rem 0;
+}
+
+button {
+    background: transparent;
+    border: none;
+    outline: 1px solid red;
+    padding: 0.25rem 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: outline-color 1s, color 1s;
+}
+
+button:hover {
+    color: red;
+    outline-color: #333;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

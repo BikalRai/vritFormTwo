@@ -26,6 +26,11 @@ button:hover {
     outline-color: #333;
 }
 
+span {
+    padding: 1rem;
+    cursor: pointer;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

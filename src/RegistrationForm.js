@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ setIsRegistered, Eye, EyeSlashed }) => {
     const [userInfo, setUserInfo] = useState({
         username: '',
         password: '',
@@ -10,6 +10,8 @@ const RegistrationForm = () => {
 
     const [emptyError, setEmptyError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [type, setType] = useState('password');
+    const [hidden, setHidden] = useState(EyeSlashed);
 
     const { username, password, confirmPassword } = userInfo;
 
@@ -34,12 +36,32 @@ const RegistrationForm = () => {
     // submit handler function
     const registerHandle = (e) => {
         e.preventDefault();
-        username !== '' && password !== ''
-            ? password === confirmPassword
-                ? alert(`Congratulation on registering ${username}`)
-                : setPasswordError(true)
-            : setEmptyError(true);
+        if (username !== '' && password !== '') {
+            if (password === confirmPassword) {
+                alert(`Congratulation on registering ${username}`);
+                setIsRegistered(true);
+            } else {
+                setPasswordError(true);
+            }
+        } else {
+            setEmptyError(true);
+        }
     };
+
+    // toggle password view
+    const toggleHidden = () => {
+        if (type === 'password') {
+            setType('text');
+            setHidden(Eye);
+        } else {
+            setType('password');
+            setHidden(EyeSlashed);
+        }
+    };
+
+    useEffect(() => {
+        console.log('I am working!!');
+    }, []);
 
     return (
         <>
@@ -59,23 +81,27 @@ const RegistrationForm = () => {
                 <div>
                     <label>Password: </label>
                     <input
-                        type="password"
+                        type={type}
+                        id="password"
                         value={password}
                         onChange={passwordHandle}
                         placeholder="Password"
                     />
+                    <span onClick={toggleHidden}>{hidden}</span>
                     {emptyError && password === '' && (
                         <p>Field must not be empty</p>
                     )}
                 </div>
+
                 <div>
                     <label>Confirm password: </label>
                     <input
-                        type="password"
+                        type={type}
                         value={confirmPassword}
                         onChange={confirmPasswordHandle}
                         placeholder="Confirm Password"
                     />
+                    <span onClick={toggleHidden}>{hidden}</span>
                     {passwordError && password !== confirmPassword && (
                         <p>Passwords do not match</p>
                     )}

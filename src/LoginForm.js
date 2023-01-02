@@ -1,11 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 
-const LoginForm = () => {
+const LoginForm = ({ Eye, EyeSlashed }) => {
     const [userInfo, setUserInfo] = useState({
         username: '',
         password: '',
     });
+
+    const [type, setType] = useState('password');
+    const [hidden, setHidden] = useState(EyeSlashed);
 
     const { username, password } = userInfo;
 
@@ -22,8 +25,15 @@ const LoginForm = () => {
     };
 
     // validate login
-    const validateLogin = () => {
-        username === username && password === password && alert('welcome!');
+    // const validateLogin = () => {
+    //     username === username && password === password && alert('welcome!');
+    // };
+
+    // toggle password handle
+    const toggle = () => {
+        //changing state to toggle
+        setHidden(Eye);
+        setType('text');
     };
 
     return (
@@ -36,10 +46,11 @@ const LoginForm = () => {
                 <div>
                     <label>Password: </label>
                     <input
-                        type="password"
+                        type={type}
                         onChange={handlePassword}
                         value={password}
                     />
+                    <span onClick={toggle}>{hidden}</span>
                 </div>
                 <button>Login</button>
             </form>

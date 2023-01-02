@@ -32,8 +32,13 @@ const LoginForm = ({ Eye, EyeSlashed }) => {
     // toggle password handle
     const toggle = () => {
         //changing state to toggle
-        setHidden(Eye);
-        setType('text');
+        if (type === 'password') {
+            setHidden(Eye);
+            setType('text');
+        } else {
+            setHidden(EyeSlashed);
+            setType('password');
+        }
     };
 
     return (
